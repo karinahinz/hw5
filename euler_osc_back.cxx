@@ -5,8 +5,7 @@
 
 using namespace std;
 
-
-void eulerf(const double, double*, const int);
+void eulerb(const double, double*,const int);
 
 int main(){
   const int n=100;	
@@ -15,8 +14,7 @@ int main(){
   const int N=20*n;
   double y[2*N];
 
-    eulerf( dt, y, N);
-  
+    eulerb( dt, y, N);
     
     for(int i=0;i<N;i++)
     {
@@ -26,12 +24,12 @@ int main(){
 return 0 ;
 }
 
-void eulerf(const double dt, double* y, const int N)
+void eulerb(const double dt, double* y,const int N)
 {
-  y[0]=1;
-  y[N]=0;	
-      for(int i=0;i<N;i++)
-	{y[i+1]=y[i]+y[N+i]*dt;
-	 y[N+i+1]=y[N+i]-y[i]*dt; 
+    y[0]=1;
+    y[N]=0;
+   for(int i= 0; i<N; i++)
+	{y[i+1]=(y[i]+dt*y[N+i])/(1+dt*dt);
+	 y[N+i+1]=(y[N+i]-dt*y[i])/(1+dt*dt);
 	}
 }
